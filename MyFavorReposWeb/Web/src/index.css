@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+}  
+
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-rows: auto;
+  margin: 60px 60px 10px 60px;
+  height: 200px;
+}
+.left,
+.right,
+.middle {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
+
+.left select,
+.right select,
+.middle {
+  width: 100%;
+  padding: 3px 3px;
+  height: 90%;
+}
+
+button{
+  width: 70%;
+  height: 20%;
+  margin: 5px 10px 5px 0px;
+}
+
+.bottom{
+   height: 200px;
+   margin: 10px 70px;
+}
+
+textarea{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
