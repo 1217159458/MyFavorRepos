@@ -1,4 +1,5 @@
 ﻿using MyFavorRepos.Data;
+using MyFavorRepos.Data.Dal.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,14 +9,13 @@ using System.Threading.Tasks;
 
 namespace MyFavorRepos.Service.IService
 {
-    public interface ILeftService
+    public interface IRightService
     {
-        int Submit(tbl_Left left);
-        bool Insert(tbl_Left left);
+        int Submit(tbl_Right left);
+        bool Insert(tbl_Right left);
         string GetList();
 
         void DeleteAll(IDbTransaction transaction = null);
-
-        bool InsertBatch(List<tbl_Left> list, IDbTransaction transaction = null);
+        bool InsertBatch(List<tbl_Right> list);
     }
 }

@@ -106,3 +106,4 @@ D:\new\MyFavorRepos\MyFavorRepos\MyFavorRepos.WebApi\MyFavorRepos.WebApi\obj\Deb
 D:\new\MyFavorRepos\MyFavorRepos\MyFavorRepos.WebApi\MyFavorRepos.WebApi\obj\Debug\net5.0\ref\MyFavorRepos.WebApi.dll
 D:\new\MyFavorRepos\MyFavorRepos\MyFavorRepos.WebApi\MyFavorRepos.WebApi\obj\Debug\net5.0\MyFavorRepos.WebApi.pdb
 D:\new\MyFavorRepos\MyFavorRepos\MyFavorRepos.WebApi\MyFavorRepos.WebApi\obj\Debug\net5.0\MyFavorRepos.WebApi.genruntimeconfig.cache
+D:\new\MyFavorRepos\MyFavorRepos\MyFavorRepos.WebApi\MyFavorRepos.WebApi\bin\Debug\net5.0\HtmlAgilityPack.dll

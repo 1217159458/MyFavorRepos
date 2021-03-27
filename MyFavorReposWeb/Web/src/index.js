@@ -5,6 +5,7 @@ import './index.css';
 import axios from 'axios';
 
 let inited = false;
+var url = "https://localhost:44373/api";
 
 const root = document.getElementById('root');
 
@@ -63,19 +64,22 @@ function Options () {
   );
 
   function init () {
-    var arr = ['boat-house-frontend','boat-house-backend','boat-house-infrastructure'];
-    setLItems(arr.map((item) => {
-           return item;
-     }));
-   // axios.get('http://localhost:8081/logs')
-   //   .then(function (response) {
-    //    setLItems(response.data.map((item) => {
-    //      return item.Level;
-    //    }));
-    //  }).catch(function (error) {
-    //    console.log(error);
-   //   });
-
+   // var arr = ['boat-house-frontend','boat-house-backend','boat-house-infrastructure'];
+  //  setLItems(arr.map((item) => {
+  //         return item;
+    // }));
+    axios.get(url + '/MgFavorRepos/Load')
+      .then(function (response) {
+        if(response.data == ''){
+           alert("访问github地址失败，该地址不稳定，请重试！");
+           return;
+        } 
+        setLItems(response.data.map((item) => {
+          return item.name;
+        }));
+      }).catch(function (error) {
+        console.log(error);
+     });
   }
 
   function moveRight () {
@@ -95,12 +99,34 @@ function Options () {
       return selectitems.indexOf(_item) < 0;
     });
       //return item !== _item;
-
-    setLItems(items);
+    
+    //setLItems(items);
 
     ritems.push.apply(ritems, selectitems);
+    Switch(items,ritems);
 
-    setRItems(ritems);
+
+    //setRItems(ritems);
+  }
+
+  function Switch(left,right){
+    axios.get(url + "/MgFavorRepos/Switch?left='" + left + "'&right='" +right + "'" )
+    .then(function (response) {
+      var le = JSON.parse(response.data.split(';')[0]);
+      var ri = JSON.parse(response.data.split(';')[1]);
+      var learr = [];
+      var riarr =[];
+      for(var i =0;i<le.length;i++){
+            learr.push(le[i].name);
+      }
+      setLItems(learr);
+      for(var i =0;i<ri.length;i++){
+        riarr.push(ri[i].name);
+      }
+      setRItems(riarr);
+    }).catch(function (error) {
+      console.log(error);
+   });
   }
 
   function moveLeft () {
@@ -120,23 +146,27 @@ function Options () {
       return selectitems.indexOf(_item) < 0;
     });
 
-    setRItems(items);
+    //setRItems(items);
     litems.push.apply(litems, selectitems);
-
-    setLItems(litems);
+    Switch(litems,items);
+    //setLItems(litems);
   }
 
   function GenerateEmail(){
-    var context = '';
-    
     if(ritems.length == 0){
-        alert('Please choose a Repos!');
+        alert('Please choose a my favor Repos!');
         return; 
     }
 
-    for(var i=0;i<ritems.length;i++){
-      context += ' - ' + ritems[i] + " 基础设施库，包括vm环境创建脚本，devops相关工具部署脚本\r\n";
-    };
-    document.getElementById('email').value = context;
+    axios.get(url + '/MgFavorRepos/GenerateEmail')
+      .then(function (response) {
+        if(response.data == ''){
+           alert("访问github地址失败，该地址不稳定，请重试！");
+           return;
+        } 
+        document.getElementById('email').value = response.data;
+      }).catch(function (error) {
+        console.log(error);
+     });
   }
 }

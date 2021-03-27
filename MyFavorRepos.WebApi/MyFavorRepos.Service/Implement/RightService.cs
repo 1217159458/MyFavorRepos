@@ -6,44 +6,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyFavorRepos.Common;
+using MyFavorRepos.Data.Dal.Entity;
 using System.Data;
 
 namespace MyFavorRepos.Service.Implement
 {
-    public class LeftService : ILeftService
+    public class RightService : IRightService
     {
-        private readonly ILeftRepository _LeftRepository;
-        public LeftService(ILeftRepository leftRepository)
+        private readonly IRightRepository _rightRepository;
+        public RightService(IRightRepository rightRepository)
         {
-            this._LeftRepository = leftRepository;
+            this._rightRepository = rightRepository;
         }
         public string GetList()
         {
-           return  _LeftRepository.GetAll<tbl_Left>()?.ToJson();
+           return _rightRepository.GetAll<tbl_Right>()?.ToJson();
         }
 
-        public bool Insert(tbl_Left left)
+        public bool Insert(tbl_Right left)
         {
             throw new NotImplementedException();
         }
 
-        public int Submit(tbl_Left left)
+        public int Submit(tbl_Right left)
         {
             throw new NotImplementedException();
         }
 
         public void DeleteAll(IDbTransaction transaction = null)
         {
-            var list = _LeftRepository.GetAll<tbl_Left>();
+            var list = _rightRepository.GetAll<tbl_Right>();
             if (list != null && list.Count() > 0)
             {
-                _LeftRepository.DeleteList<tbl_Left>(list);
+                _rightRepository.DeleteList<tbl_Right>(list);
             }
         }
 
-        public bool InsertBatch(List<tbl_Left> list, IDbTransaction transaction = null)
+        public bool InsertBatch(List<tbl_Right> list)
         {
-            return _LeftRepository.InsertBatch<tbl_Left>(list, transaction);
+            return _rightRepository.InsertBatch<tbl_Right>(list);
         }
     }
 }
